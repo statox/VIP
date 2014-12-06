@@ -6,6 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<% 
+    String signingInError = (String) session.getAttribute( "signingInError" );
+    signingInError = signingInError == null ? "" : signingInError;
+    session.setAttribute( "signingInError", null);
+%>
+
 <html>
     <head>
         <title>VIP - Secured Gate</title>
@@ -14,6 +20,18 @@
     </head>
     <body>
         <h1>VIP - Secured Gate</h1>
+        
+<!--        <p style="display:${empty session.signingInError ? "none" : "block"}">
+            Error : ${session.signingInError}
+        </p>-->
+        
+        <p style="color: red;">
+            <%--<%= session.getAttribute( "signingInError" ) != null ? session.getAttribute( "signingInError" ) : "" %>--%>
+            <!--${signingInError}-->
+            <%= signingInError %>
+            ${signingInError}
+        </p>
+        
         <p>Please Sign In :</p>
         <form action="connexion.jsp">
             <label for="login">Login</label><input type="text" name="login" id="login"><br>
