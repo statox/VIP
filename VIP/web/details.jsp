@@ -1,10 +1,15 @@
 <%-- 
-    Document   : index
-    Created on : 6 déc. 2014, 11:14:30
+    Document   : details
+    Created on : 6 déc. 2014, 10:53:27
     Author     : adrien
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="VIP.*"%>
+
+<jsp:useBean scope="request" class="VIP.Person" id="myPerson" />
+
+
 <!DOCTYPE html>
 <html>
     <head>
