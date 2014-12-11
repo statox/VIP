@@ -17,25 +17,35 @@
     Statement stmt = conn.createStatement();
 %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-        <% 
-            String login = request.getParameter( "login" );
-            String password = request.getParameter( "password" );
-            ResultSet rs = stmt.executeQuery("select * from IDENTIFIANT where LOGIN='"+login+"'");
-            while (rs.next()) {
-               String nom  = rs.getString("LOGIN");
-               String prenom  = rs.getString("MDP");
-               out.println("<li>"+nom+" "+prenom+"</li>");
-            }
-        %>
-    </body>
-</html>
+<% 
+    String login = request.getParameter( "login" );
+    String password = request.getParameter( "password" );
+    session.setAttribute( "login", login);
+    boolean connected = false;
+    ResultSet rs = stmt.executeQuery("select * from IDENTIFIANT where LOGIN='"+login+"'");
+    if (rs.next()) {
+       String rsLogin  = rs.getString("LOGIN");
+       String rsMdp  = rs.getString("MDP");
+       if (login.equals(rsLogin) && password.equals(rsMdp)) {
+           connected = true;
+       }
+    }
+    session.setAttribute( "registered", connected);
+//    RequestDispatcher d;
+//    if (connected) {
+//        d = request.getRequestDispatcher("/search.jsp");
+//    } else {
+//        d = request.getRequestDispatcher("/index.jsp");
+//        session.setAttribute("error", "Incorrect login/password");
+//    }
+//    d.forward(request, response);
+    if (connected) {
+        response.sendRedirect("search.jsp");
+    } else {
+        session.setAttribute("signingInError", "Incorrect login/password");
+        response.sendRedirect("index.jsp");
+    }
+%>
+
 
 
