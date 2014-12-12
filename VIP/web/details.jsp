@@ -44,7 +44,7 @@
         
         <p>
     
-            nom :    <input type="text" value="${myPerson.name}" readonly> 
+            Nom :    <input type="text" value="${myPerson.name}" readonly> 
             Prenom : <input type="text" value="${myPerson.prenom}" readonly> </br>
             </br>
             <b>Numeros de telephone</b> </br>
@@ -55,7 +55,7 @@
             Adresse :       <input type="text" value="${myPerson.address}" readonly>    </br>
             Code Postal :   <input type="text" value="${myPerson.zipCode}" readonly>  
             Ville :         <input type="text" value="${myPerson.city}" readonly>       </br>
-            adresse email : <input type="text" value="${myPerson.email}" readonly>    </br>
+            Adresse email : <input type="text" value="${myPerson.email}" readonly>    </br>
         </p>
         
         <form action="search.jsp">
