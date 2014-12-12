@@ -38,8 +38,10 @@
 
 <%
     // Look for a search filter in request or in session
+    // If request.filter == "" : clear filter
+    // If request.filter == null : try session.filter
     String filter = request.getParameter("filter");
-    if (filter == null || filter.isEmpty()) {
+    if (filter == null) {
         filter = (String) session.getAttribute("filter");
     }
     
@@ -50,7 +52,7 @@
     } else {
         session.setAttribute("filter", filter);
         rs = stmt.executeQuery(
-                "select * from UTILISATEUR where NAME like \""+filter+"\"");
+                "select * from UTILISATEUR where NOM like '"+filter+"'");
     }
     
     // Create a list of VIPs from the request
@@ -81,68 +83,72 @@
         <h1>VIP - Search</h1>
         <p>There are <%= quantity %> VIPs.</p>
 
-        <form>
         <center>
-            Client <input type="text" name="searchedName" > <input type="submit"  >
+            <form action="search.jsp" method="GET">
+                <label for="filter">Person</label>
+                <input type="text" name="filter" id="filter">
+                <input type="submit" value="Search">
+            </form>
         </center>
+            
     
         </br>
-    
-        <table style="width:100%">
-            <tr>
-                <th>VIP's ID</th>
-                <th>Name</th>
-                <th>Firstname</th>
-                <th>Home Phone</th>
-                <th>Mobile Phone</th>
-                <th>Professional Phone</th>
-                <th>Street</th>
-                <th>ZIP code</th>
-                <th>City</th>
-                <th>Email</th>
-            </tr>
-            <%
-                for(Person VIP : VIPs) {
-                    out.print("<tr>");
-                        out.print("<td>");
-                            out.print("<input type=\"radio\" name=\"ID\" value=\""+VIP.getName()+"\">");
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getName());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getPrenom());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getTelDom());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getTelPerso());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getTelPro());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getAddress());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getZipCode());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getCity());
-                        out.print("</td>");
-                        out.print("<td>");
-                            out.print(VIP.getEmail());
-                        out.print("</td>");
-                    out.print("</tr>");
-                }
-            %>
-        </table>
+        <form>
+            <table style="width:100%">
+                <tr>
+                    <th>VIP's ID</th>
+                    <th>Name</th>
+                    <th>Firstname</th>
+                    <th>Home Phone</th>
+                    <th>Mobile Phone</th>
+                    <th>Professional Phone</th>
+                    <th>Street</th>
+                    <th>ZIP code</th>
+                    <th>City</th>
+                    <th>Email</th>
+                </tr>
+                <%
+                    for(Person VIP : VIPs) {
+                        out.print("<tr>");
+                            out.print("<td>");
+                                out.print("<input type=\"radio\" name=\"ID\" value=\""+VIP.getName()+"\" required>");
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getName());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getPrenom());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getTelDom());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getTelPerso());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getTelPro());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getAddress());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getZipCode());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getCity());
+                            out.print("</td>");
+                            out.print("<td>");
+                                out.print(VIP.getEmail());
+                            out.print("</td>");
+                        out.print("</tr>");
+                    }
+                %>
+            </table>
 
-        <center>
-            <input type="submit" value="details" formaction="details.jsp">
-            <input type="submit" value="delete" >
-        </center>
+            <center>
+                <input type="submit" value="details" formaction="details.jsp">
+                <input type="submit" value="delete" >
+            </center>
         </form>
     </body>
 </html>
