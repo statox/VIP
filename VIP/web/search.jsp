@@ -31,9 +31,13 @@
 %>
 
 <%
-    // TODO : Handle VIP's deletion
-    // delete in db
-    // redirect to search.jsp
+    // Handle VIP's deletion
+
+    String IdToDelete = request.getParameter("ID");
+    if (IdToDelete != null)
+    {
+        stmt.executeUpdate("DELETE from UTILISATEUR where NOM='"+IdToDelete+"'");
+    }
 %>
 
 <%
@@ -126,7 +130,7 @@
 
         <center>
             <input type="submit" value="details" formaction="details.jsp">
-            <input type="submit" value="delete" >
+            <input type="submit" value="delete"  >
         </center>
         </form>
     </body>
