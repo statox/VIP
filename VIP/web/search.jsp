@@ -37,9 +37,24 @@
 %>
 
 <%
-    // TODO : Handle research criteria (~ LIKE session.getParameter("filter"))
-    int quantity = 0;
-    ResultSet rs = stmt.executeQuery("select * from UTILISATEUR");
+    // Look for a search filter in request or in session
+    String filter = request.getParameter("filter");
+    if (filter == null || filter.isEmpty()) {
+        filter = (String) session.getAttribute("filter");
+    }
+    
+    // Load VIPs from database
+    ResultSet rs = null;
+    if (filter == null || filter.isEmpty()) { 
+        rs = stmt.executeQuery("select * from UTILISATEUR");
+    } else {
+        session.setAttribute("filter", filter);
+        rs = stmt.executeQuery(
+                "select * from UTILISATEUR where NAME like \""+filter+"\"");
+    }
+    
+    // Create a list of VIPs from the request
+    int quantity = 0;    
     List<Person> VIPs = new LinkedList();
     while (rs.next()) {
        VIPs.add(new Person(rs));
