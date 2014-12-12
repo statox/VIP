@@ -1,37 +1,10 @@
 <%-- 
     Document   : details
-    Created on : 6 dÃ©c. 2014, 10:53:27
+    Created on : 6 déc. 2014, 10:53:27
     Author     : adrien
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="VIP.*"%>
-
-<jsp:useBean scope="request" class="VIP.Person" id="myPerson" />
-<%@page import="java.util.*"%>
-<%@page import="java.sql.*"%>
-<%@page import="com.sun.faces.*"%>
-
-<% 
-    String URL = "jdbc:derby://localhost:1527/VIP";
-    String USER = "efrei";
-    String PASS = "efrei";
-    Connection conn = DriverManager.getConnection(URL, USER, PASS); 
-    Statement stmt = conn.createStatement();
-%>
-
-
-<%
-    String ID = request.getParameter("ID");
-    ResultSet rs = stmt.executeQuery("select * from UTILISATEUR where NOM='" + ID + "'");
-    
-
-    if (rs.next()){
-        myPerson.inflate(rs);
-  
-    }
-        
-%>
 
 <!DOCTYPE html>
 <html>
@@ -39,10 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VIP - Details</title>
     </head>
-    <body>
+    <body> 
         <h1>VIP's Details</h1>
         
-        <p>
+        <p style="display:${empty error ? "block" : "none"};">
     
             Nom :    <input type="text" value="${myPerson.name}" readonly> 
             Prenom : <input type="text" value="${myPerson.prenom}" readonly> </br>
@@ -58,10 +31,13 @@
             Adresse email : <input type="text" value="${myPerson.email}" readonly>    </br>
         </p>
         
-        <form action="search.jsp">
+        <p style="color:red; display:${empty error ? "none" : "block"};">
+            Error : ${error}
+        </p>
+        
+        <form action="Controleur" method="POST">
+            <input type="hidden" name="requestedPage" value="search" id="hiddenAction">
             <input type="submit" value="retour" >
         </form>
-        
-        
     </body>
 </html>

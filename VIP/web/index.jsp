@@ -1,16 +1,8 @@
 <%-- 
     Document   : index
-    Created on : 6 dÃ©c. 2014, 11:14:30
+    Created on : 6 déc. 2014, 11:14:30
     Author     : adrien
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<% 
-    String signingInError = (String) session.getAttribute( "signingInError" );
-    signingInError = signingInError == null ? "" : signingInError;
-    session.setAttribute( "signingInError", null);
-%>
 
 <html>
     <head>
@@ -21,21 +13,15 @@
     <body>
         <h1>VIP - Secured Gate</h1>
         
-<!--        <p style="display:${empty session.signingInError ? "none" : "block"}">
-            Error : ${session.signingInError}
-        </p>-->
-        
-        <p style="color: red;">
-            <%--<%= session.getAttribute( "signingInError" ) != null ? session.getAttribute( "signingInError" ) : "" %>--%>
-            <!--${signingInError}-->
-            <%= signingInError %>
-            <%--${signingInError}--%>
+        <p style="color: red; display:${empty signingInError ? "none" : "block"};">
+            Error : ${signingInError}
         </p>
         
         <p>Please Sign In :</p>
-        <form action="connexion.jsp">
+        <form action="Controleur" method="POST">
             <label for="login">Login</label><input type="text" name="login" id="login"><br>
             <label for="Password">Password</label><input type="password" name="password" id="password"><br>
+            <input type="hidden" name="requestedPage" value="connexion">
             <input type="submit" value="Sign In">
         </form>
     </body>
