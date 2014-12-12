@@ -21,6 +21,7 @@
     String login = request.getParameter( "login" );
     String password = request.getParameter( "password" );
     session.setAttribute( "login", login);
+    
     boolean connected = false;
     ResultSet rs = stmt.executeQuery("select * from IDENTIFIANT where LOGIN='"+login+"'");
     if (rs.next()) {
