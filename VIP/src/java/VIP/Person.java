@@ -123,6 +123,13 @@ public class Person {
         this.city = "default";
         this.email = "default";
     }
+    
+    public Person (ResultSet rs)
+    {
+        if (!inflate(rs)) {
+            throw new java.security.InvalidParameterException("Could not inflate.");
+        }
+    }
 
     @Override
     public String toString() {

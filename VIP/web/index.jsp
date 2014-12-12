@@ -29,7 +29,7 @@
             <%--<%= session.getAttribute( "signingInError" ) != null ? session.getAttribute( "signingInError" ) : "" %>--%>
             <!--${signingInError}-->
             <%= signingInError %>
-            ${signingInError}
+            <%--${signingInError}--%>
         </p>
         
         <p>Please Sign In :</p>
