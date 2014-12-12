@@ -27,9 +27,8 @@
     
 
     if (rs.next()){
-
         myPerson.inflate(rs);
-        
+  
     }
         
 %>
