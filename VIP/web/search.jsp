@@ -81,7 +81,13 @@
         <h1>VIP - Search</h1>
         <p>There are <%= quantity %> VIPs.</p>
 
-
+        <form>
+        <center>
+            Client <input type="text" name="searchedName" > <input type="submit"  >
+        </center>
+    
+        </br>
+    
         <table style="width:100%">
             <tr>
                 <th>VIP's ID</th>
@@ -133,6 +139,10 @@
             %>
         </table>
 
-
+        <center>
+            <input type="submit" value="details" formaction="details.jsp">
+            <input type="submit" value="delete" >
+        </center>
+        </form>
     </body>
 </html>
