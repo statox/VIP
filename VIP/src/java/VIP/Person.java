@@ -5,6 +5,8 @@
  */
 package VIP;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author adrien
@@ -127,5 +129,26 @@ public class Person {
         return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", telDom=" + telDom + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
     }
 
+    public Boolean inflate (ResultSet rs)
+    {
+        try
+        {
+            this.setName(       rs.getString("NOM")); 
+            this.setPrenom(     rs.getString("PRENOM")); 
+            this.setTelPerso(   rs.getString("TELPOR")); 
+            this.setTelPro(     rs.getString("TELPRO")); 
+            this.setTelDom(     rs.getString("TELDOM")); 
+            this.setAddress(    rs.getString("ADRESSE")); 
+            this.setZipCode(    rs.getString("CP")); 
+            this.setCity(       rs.getString("VILLE")); 
+            this.setEmail(      rs.getString("EMAIL"));
+        }
+        catch ( Exception e)
+        {
+            return false;
+        }
+        
+        return true;
+    }
     
 }
