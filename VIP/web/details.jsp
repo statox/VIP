@@ -37,14 +37,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Details du membre</title>
+        <title>VIP - Details</title>
     </head>
     <body>
-        <h1>Detail d'un membre du club EFREI/M1/IL/JEE</h1>
+        <h1>VIP's Details</h1>
         
         <p>
     
-            nom :    <input type="text" value="${myPerson.name}" readonly> 
+            Nom :    <input type="text" value="${myPerson.name}" readonly> 
             Prenom : <input type="text" value="${myPerson.prenom}" readonly> </br>
             </br>
             <b>Numeros de telephone</b> </br>
@@ -55,7 +55,7 @@
             Adresse :       <input type="text" value="${myPerson.address}" readonly>    </br>
             Code Postal :   <input type="text" value="${myPerson.zipCode}" readonly>  
             Ville :         <input type="text" value="${myPerson.city}" readonly>       </br>
-            adresse email : <input type="text" value="${myPerson.email}" readonly>    </br>
+            Adresse email : <input type="text" value="${myPerson.email}" readonly>    </br>
         </p>
         
         <form action="search.jsp">

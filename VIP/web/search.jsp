@@ -31,9 +31,18 @@
 %>
 
 <%
-    // TODO : Handle VIP's deletion
-    // delete in db
-    // redirect to search.jsp
+    // Handle VIP's deletion
+
+    String IdToDelete = request.getParameter("ID");
+    boolean successfullyDeleted = false;
+    boolean deletion = false;
+    if (IdToDelete != null)
+    {
+        deletion = true;
+        if(stmt.executeUpdate("DELETE from UTILISATEUR where NOM='"+IdToDelete+"'") == 1) {
+            successfullyDeleted = true;
+        }        
+    }
 %>
 
 <%
@@ -43,6 +52,8 @@
     String filter = request.getParameter("filter");
     if (filter == null) {
         filter = (String) session.getAttribute("filter");
+    } else if(filter.isEmpty()) {
+        session.setAttribute("filter", null);
     }
     
     // Load VIPs from database
@@ -81,7 +92,7 @@
     </head>
     <body>
         <h1>VIP - Search</h1>
-        <p>There are <%= quantity %> VIPs.</p>
+        
 
         <center>
             <form action="search.jsp" method="GET">
@@ -144,6 +155,25 @@
                     }
                 %>
             </table>
+            
+            
+            <center>
+                <%
+                        if (quantity == 0 && (filter == null || filter.isEmpty())) {
+                            out.print("<p style=\"color:blue;\">The club needs VIPs !</p>");
+                        } else if (quantity == 0 && filter != null && !filter.isEmpty()) {
+                            out.print("<p style=\"color:red;\">No result.</p>");
+                        }
+                        
+                        if (deletion) {
+                            if (successfullyDeleted) {
+                                out.print("<p style=\"color:green;\">Successfully deleted VIP !</p>");
+                            } else {
+                                out.print("<p style=\"color:red;\">Error while trying to delete VIP !</p>");
+                            }
+                        }
+                %>
+            </center>
 
             <center>
                 <input type="submit" value="details" formaction="details.jsp">
