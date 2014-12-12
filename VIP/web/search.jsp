@@ -47,8 +47,6 @@
     }
 %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -80,21 +78,50 @@
                 <th>VIP's ID</th>
                 <th>Name</th>
                 <th>Firstname</th>
-                <th>Phone</th>
+                <th>Home Phone</th>
                 <th>Mobile Phone</th>
+                <th>Professional Phone</th>
                 <th>Street</th>
                 <th>ZIP code</th>
                 <th>City</th>
                 <th>Email</th>
             </tr>
-            <c:forEach items="pageScope.VIPs" var="VIP">
-                <tr>
-                    <%--<td><%= VIPs.toString() %></td>--%>
-                    <td>${VIP}</td>
-                    <td>Jackson</td>
-                    <td>94</td>
-                </tr>
-            </c:forEach>
+            <%
+                for(Person VIP : VIPs) {
+                    out.print("<tr>");
+                        out.print("<td>");
+                            out.print("<input type=\"radio\" name=\"ID\" value=\""+VIP.getName()+"\">");
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getName());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getPrenom());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getTelDom());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getTelPerso());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getTelPro());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getAddress());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getZipCode());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getCity());
+                        out.print("</td>");
+                        out.print("<td>");
+                            out.print(VIP.getEmail());
+                        out.print("</td>");
+                    out.print("</tr>");
+                }
+            %>
         </table>
 
         <center>
