@@ -5,6 +5,8 @@
  */
 package VIP;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author adrien
@@ -15,6 +17,7 @@ public class Person {
     private String prenom;
     private String telPerso;
     private String telPro;
+    private String telDom;
     private String address;
     private String zipCode;
     private String city;
@@ -33,6 +36,10 @@ public class Person {
         return telPerso;
     }
 
+    public String getTelDom() {
+        return telDom;
+    }
+    
     public String getTelPro() {
         return telPro;
     }
@@ -70,6 +77,10 @@ public class Person {
         this.telPro = telPro;
     }
 
+    public void setTelDom(String telDom) {
+        this.telPro = telDom;
+    }
+    
     public void setAddress(String address) {
         this.address = address;
     }
@@ -88,11 +99,12 @@ public class Person {
 
     /* ctors */
     
-    public Person(String name, String prenom, String telPerso, String telPro, String address, String zipCode, String city, String email) {
+    public Person(String name, String prenom, String telPerso, String telPro, String telDom, String address, String zipCode, String city, String email) {
         this.name = name;
         this.prenom = prenom;
         this.telPerso = telPerso;
         this.telPro = telPro;
+        this.telDom = telDom;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
@@ -105,6 +117,7 @@ public class Person {
         this.prenom = "default";
         this.telPerso = "default";
         this.telPro = "default";
+        this.telDom = "default";
         this.address = "default";
         this.zipCode = "default";
         this.city = "default";
@@ -113,8 +126,29 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
+        return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", telDom=" + telDom + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
     }
 
+    public Boolean inflate (ResultSet rs)
+    {
+        try
+        {
+            this.setName(       rs.getString("NOM")); 
+            this.setPrenom(     rs.getString("PRENOM")); 
+            this.setTelPerso(   rs.getString("TELPOR")); 
+            this.setTelPro(     rs.getString("TELPRO")); 
+            this.setTelDom(     rs.getString("TELDOM")); 
+            this.setAddress(    rs.getString("ADRESSE")); 
+            this.setZipCode(    rs.getString("CP")); 
+            this.setCity(       rs.getString("VILLE")); 
+            this.setEmail(      rs.getString("EMAIL"));
+        }
+        catch ( Exception e)
+        {
+            return false;
+        }
+        
+        return true;
+    }
     
 }
