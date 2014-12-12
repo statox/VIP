@@ -4,6 +4,7 @@
     Author     : matthieudelaro
 --%>
 
+<%@page import="VIP.Person"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="com.sun.faces.*"%>
@@ -31,15 +32,17 @@
 
 <%
     // TODO : Handle VIP's deletion
+    // delete in db
+    // redirect to search.jsp
 %>
 
 <%
-    // TODO : Handle research criteria (~ LIKE nameSearched)
+    // TODO : Handle research criteria (~ LIKE session.getParameter("filter"))
     int quantity = 0;
     ResultSet rs = stmt.executeQuery("select * from UTILISATEUR");
+    List<Person> VIPs = new LinkedList();
     while (rs.next()) {
-       String rsLogin  = rs.getString("LOGIN");
-       String rsMdp  = rs.getString("MDP");
+       VIPs.add(new Person(rs));
        quantity++;
     }
 %>
@@ -78,13 +81,14 @@
                 <th>City</th>
                 <th>Email</th>
             </tr>
-            <%-- <c:forEach >
+            <c:forEach items="pageScope.VIPs" var="VIP">
                 <tr>
-                    <td>Eve</td>
+                    <%--<td><%= VIPs.toString() %></td>--%>
+                    <td>${VIP}</td>
                     <td>Jackson</td>
                     <td>94</td>
                 </tr>
-            </c:forEach> --%>
+            </c:forEach>
         </table>
 
 
