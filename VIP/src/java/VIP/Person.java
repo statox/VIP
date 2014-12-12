@@ -78,7 +78,7 @@ public class Person {
     }
 
     public void setTelDom(String telDom) {
-        this.telPro = telDom;
+        this.telDom = telDom;
     }
     
     public void setAddress(String address) {
