@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpSession;
  * @author matthieudelaro
  */
 public class Controleur extends HttpServlet {
+    @EJB
+    private ManagerUtilisateurs managerUtilisateurs;
     private Connection conn = null;
     private Statement stmt = null;
     private boolean successfullyInitialized = false;
