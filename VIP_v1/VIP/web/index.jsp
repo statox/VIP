@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!--Checks for a warning message related to authentication,
+    makes it available to display it later on the page,
+    and delete it from session's attributes if it exist.-->
 <% 
     String signingInError = (String) session.getAttribute( "signingInError" );
     signingInError = signingInError == null ? "" : signingInError;
@@ -20,10 +23,6 @@
     </head>
     <body>
         <h1>VIP - Secured Gate</h1>
-        
-<!--        <p style="display:${empty session.signingInError ? "none" : "block"}">
-            Error : ${session.signingInError}
-        </p>-->
         
         <p style="color: red;">
             <%--<%= session.getAttribute( "signingInError" ) != null ? session.getAttribute( "signingInError" ) : "" %>--%>

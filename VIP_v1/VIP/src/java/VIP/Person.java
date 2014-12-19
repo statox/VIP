@@ -136,6 +136,13 @@ public class Person {
         return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", telDom=" + telDom + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
     }
 
+    /**
+     * This method inflates object's attributes with the current row of 
+     * the given ResultSet coming from a request to the database.
+     * 
+     * @param rs
+     * @return true in case of success, false otherwise.
+     */
     public Boolean inflate (ResultSet rs)
     {
         try

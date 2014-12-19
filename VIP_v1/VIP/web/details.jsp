@@ -12,6 +12,18 @@
 <%@page import="java.sql.*"%>
 <%@page import="com.sun.faces.*"%>
 
+<%
+    // Being signed in is mandatory.
+    // Thus, make sure the user loged in :
+    Boolean connected = (Boolean) session.getAttribute( "registered");
+    if (connected ==null || !connected) {
+        session.setAttribute("signingInError", "Please login to access the list of VIPs.");
+        response.sendRedirect("index.jsp");
+    }
+%>
+
+<!--Connect to data base-->
+<!--Errors will be handles starting in version 2-->
 <% 
     String URL = "jdbc:derby://localhost:1527/VIP";
     String USER = "efrei";
@@ -21,6 +33,8 @@
 %>
 
 
+<!--Retrieve VIP's details from data base-->
+<!--Errors will be handles starting in version 2-->
 <%
     String ID = request.getParameter("ID");
     ResultSet rs = stmt.executeQuery("select * from UTILISATEUR where NOM='" + ID + "'");

@@ -21,6 +21,8 @@
     }
 %>
 
+<!--Connect to data base-->
+<!--Errors will be handles starting in version 2-->
 <%
     // Connect to database
     String URL = "jdbc:derby://localhost:1527/VIP";
@@ -41,12 +43,16 @@
         deletion = true;
         if(stmt.executeUpdate("DELETE from UTILISATEUR where NOM='"+IdToDelete+"'") == 1) {
             successfullyDeleted = true;
-        }        
+        }
+        //else {
+        //    successfullyDeleted = false;// already equals false
+        //}
     }
 %>
 
 <%
-    // Look for a search filter in request or in session
+    // Look for a the search filter in request or in session.
+    // It filters users based on their family name.
     // If request.filter == "" : clear filter
     // If request.filter == null : try session.filter
     String filter = request.getParameter("filter");
@@ -156,7 +162,7 @@
                 %>
             </table>
             
-            
+            <!--Display log messages to the user -->
             <center>
                 <%
                         if (quantity == 0 && (filter == null || filter.isEmpty())) {

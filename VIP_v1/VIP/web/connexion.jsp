@@ -9,6 +9,8 @@
 <%@page import="com.sun.faces.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!--Connect to data base-->
+<!--Errors will be handles starting in version 2-->
 <% 
     String URL = "jdbc:derby://localhost:1527/VIP";
     String USER = "efrei";
@@ -17,6 +19,8 @@
     Statement stmt = conn.createStatement();
 %>
 
+<!--Validates/rejects given login/password, and routes the user to search.jsp or index.jsp (with a warning message)-->
+<!--Errors will be handles starting in version 2-->
 <% 
     String login = request.getParameter( "login" );
     String password = request.getParameter( "password" );
@@ -32,14 +36,6 @@
        }
     }
     session.setAttribute( "registered", connected);
-//    RequestDispatcher d;
-//    if (connected) {
-//        d = request.getRequestDispatcher("/search.jsp");
-//    } else {
-//        d = request.getRequestDispatcher("/index.jsp");
-//        session.setAttribute("error", "Incorrect login/password");
-//    }
-//    d.forward(request, response);
     if (connected) {
         response.sendRedirect("search.jsp");
     } else {
