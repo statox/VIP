@@ -19,15 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Adrien
+ * @author matthieudelaro
  */
 @Entity
 @Table(name = "UTILISATEUR")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u"),
-    @NamedQuery(name = "Utilisateur.findByLogin", query = "SELECT u FROM Utilisateur u WHERE u.login = :login"),
-    @NamedQuery(name = "Utilisateur.findByMdp", query = "SELECT u FROM Utilisateur u WHERE u.mdp = :mdp"),
     @NamedQuery(name = "Utilisateur.findByNom", query = "SELECT u FROM Utilisateur u WHERE u.nom = :nom"),
     @NamedQuery(name = "Utilisateur.findByPrenom", query = "SELECT u FROM Utilisateur u WHERE u.prenom = :prenom"),
     @NamedQuery(name = "Utilisateur.findByTeldom", query = "SELECT u FROM Utilisateur u WHERE u.teldom = :teldom"),
@@ -39,12 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Utilisateur.findByTelpro", query = "SELECT u FROM Utilisateur u WHERE u.telpro = :telpro")})
 public class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Size(max = 32)
-    @Column(name = "LOGIN")
-    private String login;
-    @Size(max = 32)
-    @Column(name = "MDP")
-    private String mdp;
     @Id
     @Basic(optional = false)
     @NotNull
@@ -81,38 +73,6 @@ public class Utilisateur implements Serializable {
 
     public Utilisateur(String nom) {
         this.nom = nom;
-    }
-    
-    public Utilisateur (String name, String prenom, 
-                        String telPerso, String telPro, String telDom, 
-                        String address, int zipCode, String city, 
-                        String email)
-    {
-        this.nom = name;
-        this.prenom = prenom;
-        this.telpor = telPerso;
-        this.telpro = telPro;
-        this.teldom = telDom;
-        this.adresse = address;
-        this.cp = zipCode;
-        this.ville = city;
-        this.email = email;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
     }
 
     public String getNom() {

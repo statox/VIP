@@ -99,7 +99,9 @@ public class Person {
 
     /* ctors */
     
-    public Person(String name, String prenom, String telPerso, String telPro, String telDom, String address, String zipCode, String city, String email) {
+    public Person(String name, String prenom, String telPerso, String telPro,
+            String telDom, String address, String zipCode, String city,
+            String email) {
         this.name = name;
         this.prenom = prenom;
         this.telPerso = telPerso;
@@ -124,9 +126,28 @@ public class Person {
         this.email = "default";
     }
     
-    public Person (ResultSet rs)
+    /**
+     * Creates a Person based on the current row of 
+     * the given ResultSet coming from a request to the database.
+     * @param rs 
+     * @throws a java.security.InvalidParameterException in case an error 
+     * occurs while reading the resultSet.
+     */
+    public Person (ResultSet rs) throws java.security.InvalidParameterException
     {
         if (!inflate(rs)) {
+            throw new java.security.InvalidParameterException("Could not inflate.");
+        }
+    }
+    
+    /**
+     * Creates a Person based on the given Utilisateur.
+     * @throws a java.security.InvalidParameterException in case an error 
+     * occurs while reading the resultSet.
+     */
+    public Person (Utilisateur u) throws java.security.InvalidParameterException
+    {
+        if (!inflate(u)) {
             throw new java.security.InvalidParameterException("Could not inflate.");
         }
     }
@@ -135,7 +156,14 @@ public class Person {
     public String toString() {
         return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", telDom=" + telDom + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
     }
-
+    
+    /**
+     * This method inflates object's attributes with the current row of 
+     * the given ResultSet coming from a request to the database.
+     * 
+     * @param rs
+     * @return true in case of success, false otherwise.
+     */
     public Boolean inflate (ResultSet rs)
     {
         try
@@ -158,4 +186,47 @@ public class Person {
         return true;
     }
     
+    /**
+     * This method inflates object's attributes based on the given Utilisateur.
+     * 
+     * @param u
+     * @return true in case of success, false otherwise.
+     */
+    public Boolean inflate (Utilisateur u)
+    {
+        try
+        {
+            this.setName(       u.getNom()); 
+            this.setPrenom(     u.getPrenom()); 
+            this.setTelPerso(   u.getTelpor()); 
+            this.setTelPro(     u.getTelpro()); 
+            this.setTelDom(     u.getTeldom()); 
+            this.setAddress(    u.getAdresse()); 
+            this.setZipCode(    u.getCp().toString()); 
+            this.setCity(       u.getVille()); 
+            this.setEmail(      u.getEmail());
+        }
+        catch ( Exception e)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public Utilisateur toUtilisateur() {
+        Utilisateur u = new Utilisateur();
+        
+        u.setNom(name);
+        u.setPrenom(prenom);
+        u.setTelpor(telPerso);
+        u.setTelpro(telPro);
+        u.setTeldom(telDom);
+        u.setAdresse(address);
+        u.setCp(Integer.parseInt(zipCode));
+        u.setVille(city);
+        u.setEmail(email);
+        
+        return u;
+    }
 }
