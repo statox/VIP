@@ -90,7 +90,7 @@ public class Controleur extends HttpServlet {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         
-        if (requestedPage.equals("search")) {
+        if (requestedPage.equals("search") || requestedPage.equals("delete")) {
             handleSearch(request, session, response);
         }
         

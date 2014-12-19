@@ -84,21 +84,8 @@
             </center>
 
             <center>
-                <input type="hidden" name="requestedPage" value="search" id="hiddenAction">
-                <!--
-                Use this :
-                    <input type="hidden" name="requestedPage" value="search">
-                to specify in a form which page I want to view. But I can't here because 
-                -->
-                <input type="submit" value="details" onclick="(function() {
-                    // set the value of the requestedPage
-                    document.getElementById('hiddenAction').value = 'details';
-                })()">
-                
-                <input type="submit" value="delete"  onclick="(function() {
-                    // set the value of the requestedPage
-                    document.getElementById('hiddenAction').value = 'search';
-                })()">
+                <input type="submit" value="details" name="requestedPage" >
+                <input type="submit" value="delete" name="requestedPage" >
             </center>
         </form>
     </body>
