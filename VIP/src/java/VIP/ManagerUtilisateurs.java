@@ -20,7 +20,8 @@ public class ManagerUtilisateurs {
 
     @PersistenceContext  
     private EntityManager em;
-
+   
+    
     public Utilisateur creerUtilisateur (String name, String prenom, String telPerso, String telPro, String telDom, String address, int zipCode, String city, String email) 
     {
         Utilisateur u = new Utilisateur(name, prenom, telPerso, telPro, telDom, address, zipCode, city, email);
@@ -30,7 +31,14 @@ public class ManagerUtilisateurs {
     
     public Collection<Utilisateur> getAllUsers() {  
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select u from Utilisateur u");  
+//        Query q = em.createQuery("SELECT u FROM Utilisateur u");  
+        Query q = em.createNamedQuery("Utilisateur.findAll", Utilisateur.class); 
         return q.getResultList();  
     }  
+    
+    public Utilisateur getUserByName (String name)
+    {
+        Query q = em.createNamedQuery("Utilisateur.findByNom", Utilisateur.class);
+        return (Utilisateur) q.getResultList().get(0);
+    }
 }

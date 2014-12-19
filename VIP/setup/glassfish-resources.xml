@@ -10,6 +10,9 @@
         <property name="URL" value="jdbc:derby://localhost:1527/VIP"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="VIP" object-type="user" pool-name="derby_net_VIP_efreiPool"/>
+<!--    <jdbc-resource enabled="true" jndi-name="VIP" object-type="user" pool-name="derby_net_VIP_efreiPool"/>
     <jdbc-resource enabled="true" jndi-name="BaseUsers" object-type="user" pool-name="derby_net_VIP_efreiPool"/>
+    <jdbc-resource enabled="true" jndi-name="Utilisateurs" object-type="user" pool-name="derby_net_VIP_efreiPool"/>
+    <jdbc-resource enabled="true" jndi-name="UTILISATEUR" object-type="user" pool-name="derby_net_VIP_efreiPool"/>-->
+    <jdbc-resource enabled="true" jndi-name="UsersBase" object-type="user" pool-name="derby_net_VIP_efreiPool"/>
 </resources>

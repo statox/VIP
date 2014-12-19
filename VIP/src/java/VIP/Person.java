@@ -99,6 +99,7 @@ public class Person {
 
     /* ctors */
     
+    
     public Person(String name, String prenom, String telPerso, String telPro, String telDom, String address, String zipCode, String city, String email) {
         this.name = name;
         this.prenom = prenom;
@@ -124,18 +125,31 @@ public class Person {
         this.email = "default";
     }
     
+    /* constructor used in V2 to create a person from a result set */
     public Person (ResultSet rs)
     {
         if (!inflate(rs)) {
             throw new java.security.InvalidParameterException("Could not inflate.");
         }
     }
+    
+    /* constructor used in V2 to create a person from a Utilisateur */
+    public Person (Utilisateur u)
+    {
+        if (!inflate(u)) {
+            throw new java.security.InvalidParameterException("Could not inflate.");
+        }
+    }
+    
 
     @Override
     public String toString() {
         return "Person{" + "name=" + name + ", prenom=" + prenom + ", telPerso=" + telPerso + ", telPro=" + telPro + ", telDom=" + telDom + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", email=" + email + '}';
     }
 
+    /* populate the field of a Person from an existing object ResultSet
+     * To work properly, the function needs that we already did rs.next before the calling   
+     */ 
     public Boolean inflate (ResultSet rs)
     {
         try
@@ -149,6 +163,29 @@ public class Person {
             this.setZipCode(    rs.getString("CP")); 
             this.setCity(       rs.getString("VILLE")); 
             this.setEmail(      rs.getString("EMAIL"));
+        }
+        catch ( Exception e)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /* populate the field of a Person from an existing object Utilisateur */
+    public Boolean inflate (Utilisateur u)
+    {
+        try
+        {
+            this.setName(       u.getNom()); 
+            this.setPrenom(     u.getPrenom()); 
+            this.setTelPerso(   u.getTelpor()); 
+            this.setTelPro(     u.getTelpro()); 
+            this.setTelDom(     u.getTeldom()); 
+            this.setAddress(    u.getAdresse()); 
+            this.setZipCode(    u.getCp().toString()); 
+            this.setCity(       u.getVille()); 
+            this.setEmail(      u.getEmail());
         }
         catch ( Exception e)
         {
